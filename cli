@@ -1,0 +1,18 @@
+export MASTER_SIZE="t3.micro"
+export NODE_SIZE="t3.micro"
+export ZONES="us-east-1a"
+
+kops create cluster --cloud=aws \
+--name=kops.renanfenrich.xyz \
+--state=s3://kops.renanfenrich.xyz \
+--dns-zone=kops.renanfenrich.xyz \
+--node-count 3 \
+--zones $ZONES \
+--node-size $NODE_SIZE \
+--master-size $MASTER_SIZE \
+--master-zones $ZONES \
+--networking amazonvpc \
+--topology private \
+--bastion="true" \
+--target=terraform \
+--out=.
